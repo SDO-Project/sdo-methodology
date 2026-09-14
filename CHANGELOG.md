@@ -23,6 +23,8 @@ The project is currently in pre-release conceptual development. Version numbers 
 - Clarified that executor identity remains relevant only when authority, law, certification, safety, access, accountability, segregation of duties, or policy legitimately requires it.
 - Repositioned SDO as a **general-purpose and implementation-independent methodology** rather than a methodology specifically for hybrid human-agent operations.
 - Aligned Core Concepts and Glossary with executor independence and conformance-based success.
+- Clarified that **Notification is not Handoff** and that responsibility transfer depends on explicit Receiving Conditions.
+- Established channel independence for handoffs: SDO defines transfer semantics but does not mandate the communication or transport technology.
 
 ### Added
 
@@ -44,6 +46,25 @@ The project is currently in pre-release conceptual development. Version numbers 
 - Three-layer structural separation: **Obligation → Execution → Conformance**.
 - Abstract conformance rule for minimum SDO execution success.
 - Minimum structural SDO conformance criteria.
+- **SDO Handoff Model v0.1**, defining:
+  - Handoff Record;
+  - Receiving Conditions;
+  - source and receiver responsibilities;
+  - transfer and acceptance as distinct states;
+  - explicit blocked, rejected, accepted, and conditional outcomes;
+  - chainable responsibility transfers with Trace continuity.
+- **SDO Adoption Model v0.1**, defining:
+  - Level 1 — Manual;
+  - Level 2 — System-Assisted;
+  - Level 3 — Machine-Enforced;
+  - progressive adoption without changing the semantic model;
+  - a generic eight-step pilot method;
+  - minimum viable tooling test;
+  - role responsibilities without mandatory job titles;
+  - adoption anti-patterns.
+- **Implementation Minimalism** as an adoption principle.
+- Guiding statement: **Use the systems you already have before adding new ones.**
+- Guiding statement: **Notification is not handoff.**
 - Novelty and differentiation research notes.
 - Explicit publication philosophy: `Concept Draft → Public Draft → Release Candidate → 1.0`.
 - **Creative Commons Attribution 4.0 International (CC BY 4.0)** licensing for methodology documentation, templates, diagrams, and research notes unless otherwise noted.
