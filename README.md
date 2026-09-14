@@ -1,30 +1,49 @@
 # SDO — Specification-Driven Operations
 
-> **Concept Draft v0.1**
+> **Concept Draft v0.2**
 
-**Specification-Driven Operations (SDO)** is an emerging methodology for organizational execution in which work is specified, validated, authorized, executed, verified, and transferred through explicit, structured, traceable specifications.
+**Specification-Driven Operations (SDO)** is an open methodology proposal for modern organizational execution.
 
-SDO is inspired by the **Spec-Driven Development (SDD)** principle that execution becomes more reliable when the specification is made explicit before implementation begins. SDO generalizes that idea beyond software development and applies it to operational work performed by people, teams, systems, automations, and AI agents.
+SDO defines operational obligations through explicit, structured, versioned specifications and evaluates execution by the conformance of results and evidence to those specifications.
+
+It is inspired by the **Spec-Driven Development (SDD)** principle that execution becomes more reliable when the specification is made explicit before implementation begins. SDO generalizes that principle beyond software development and applies it to organizational work regardless of whether execution is performed by a person, team, software system, automation, AI agent, machine, external party, or another execution mechanism.
 
 ## Core thesis
 
-Organizations have digitized tasks, communication, and records, but many operational handoffs still depend on incomplete requests, free text, informal agreements, and human interpretation.
+Organizations have digitized tasks, communication, records, automation, and workflows, but many operational handoffs still depend on incomplete requests, free text, informal agreements, tacit knowledge, and assumptions about who will perform the work.
 
 SDO proposes a different default:
 
 > **Specify before execution. Validate before transfer.**
 
-A work item should not advance merely because someone marked a task as complete. It advances when the conditions required by the next execution stage are explicitly satisfied or when a controlled exception has been formally authorized.
+The specification defines the obligation. A concrete execution produces a result. That result is then verified against the applicable specification.
 
-## Actor-neutral execution
+```text
+EXECUTION SPECIFICATION
+          ↓
+   EXECUTION INSTANCE
+          ↓
+        RESULT
+          ↓
+ CONFORMANCE CHECK
+      /        \
+    PASS       FAIL
+     ↓           ↓
+ HANDOFF     REWORK /
+             EXCEPTION
+```
 
-A distinguishing objective of SDO is to separate the **work contract** from the **executor**.
+## Executor independence
 
-Where capability and authority permit, the same core Execution Specification should be able to govern work performed by a human, team, AI agent, software system, automation, external party, or hybrid combination without redefining the business obligation.
+A central principle of SDO is that the operational obligation should not be unnecessarily coupled to the identity or class of the executor.
 
-> **Define the work once. Govern every executor by the contract.**
+> **The executor belongs to the execution. The obligation belongs to the specification.**
 
-Actor-specific controls remain possible through capability, authority, segregation-of-duties, verification, and execution-profile requirements.
+A person, team, software service, automation, AI agent, robot, supplier, or future execution mechanism may perform the work when applicable constraints permit it. SDO does not need to change merely because the executor changes.
+
+> **Execution is judged by conformance to the specification, not by the identity of the executor.**
+
+Executor identity remains relevant when authority, law, certification, safety, accountability, segregation of duties, access, or organizational policy makes it a legitimate requirement. Such restrictions should be expressed explicitly rather than embedded as undocumented assumptions.
 
 ## The SDO lifecycle
 
@@ -48,14 +67,29 @@ When a specification cannot be satisfied, execution may enter a **Controlled Exc
 
 ## Foundational concepts
 
-- **Execution Specification** — the explicit definition of the conditions, data, rules, dependencies, criteria, and evidence required for execution.
-- **Execution Unit** — a bounded stage or unit of work responsible for producing an expected result.
-- **Execution Agent** — a person, team, system, automation, supplier, robot, or AI agent performing the work.
-- **Validation Gate** — the mechanism that verifies whether an execution is eligible to advance.
-- **Execution Contract** — the structured agreement governing a handoff between execution units.
-- **Evidence** — objective information used to verify execution or completion.
+- **Execution Specification** — the authoritative definition of the operational obligation, including conditions, constraints, expected result, acceptance criteria, evidence, exceptions, and handoff requirements.
+- **Execution Unit** — a bounded unit of governed work.
+- **Execution Instance** — a concrete attempt to satisfy an Execution Specification.
+- **Result** — the output, decision, state change, service, or other observable outcome produced by an Execution Instance.
+- **Validation Gate** — the mechanism that determines whether required conditions are satisfied before advancement.
+- **Evidence** — objective information used to support a conformance or verification decision.
 - **Controlled Exception** — a formally declared and authorized deviation from the normal specification.
-- **Handoff** — a validated transfer of responsibility from one execution unit to another.
+- **Handoff** — a validated transfer of a conformant result and required context to the next execution boundary.
+- **Trace** — the auditable history linking specification, execution, result, evidence, decisions, exceptions, and handoff.
+
+## Open methodology
+
+SDO is intended to be **open, adaptable, implementation-independent, and usable across organizational contexts**.
+
+It is not a proprietary workflow product, a closed operating system, or a mandatory certification scheme.
+
+Organizations may implement SDO using forms, spreadsheets, ERP/CRM systems, BPM engines, databases, APIs, policy engines, automation platforms, AI-agent orchestration systems, machines, custom software, or combinations of them.
+
+> **Adapt the implementation. Preserve the principles.**
+
+Use, experimentation, criticism, adaptation, and publication of implementation patterns are encouraged.
+
+Unless otherwise noted, the methodology documentation, templates, diagrams, and research notes in this repository are licensed under **Creative Commons Attribution 4.0 International (CC BY 4.0)**. See [LICENSE](LICENSE).
 
 ## Documentation
 
@@ -68,25 +102,27 @@ When a specification cannot be satisfied, execution may enter a **Controlled Exc
 - [Controlled Exceptions](docs/06-controlled-exceptions.md)
 - [Glossary](docs/07-glossary.md)
 - [Minimum Viable Model](docs/08-minimum-viable-model.md)
+- [Open Methodology Philosophy](docs/09-open-methodology.md)
 - [Execution Specification v0.1](spec/execution-spec-v0.1.md)
 - [Execution Specification YAML Template](templates/execution-spec.yaml)
 - [Novelty Assessment](research/novelty-assessment-v0.1.md)
+- [Executor Independence Differentiation](research/executor-independence-differentiation-v0.1.md)
 - [Research Notes](research/README.md)
 
 ## Research position
 
-Current research shows substantial prior work in declarative BPM, artifact-centric processes, case management, policy-as-code, human-in-the-loop AI, agentic orchestration, and shared specifications for humans and AI in technical domains.
+SDO does not claim ownership over the underlying ideas of specifications, workflow validation, evidence, traceability, exception handling, process management, automation, or agentic execution. These concepts have substantial prior histories across multiple disciplines.
 
-The current SDO research hypothesis is therefore deliberately narrower: SDO may be differentiated by combining these mechanisms into a **general-purpose, technology-independent organizational methodology centered on actor-neutral Execution Specifications**.
+The current research hypothesis is narrower: SDO may be differentiated by synthesizing these mechanisms into a **general-purpose, technology-independent organizational methodology in which operational obligations are defined independently from executors and execution success is determined by conformance to the applicable specification**.
 
 No claim of historical first invention is made at this stage.
 
 ## Status
 
-SDO is currently under conceptual development. Terminology, scope, principles, and formal mechanisms may change while the methodology is tested against real operational processes.
+SDO is currently under conceptual development. Terminology, scope, principles, and formal mechanisms may change while the methodology is tested against different operational contexts.
 
 This repository is the source of truth for that development.
 
 ## Version
 
-**Concept Draft v0.1 — September 2026**
+**Concept Draft v0.2 — September 2026**
