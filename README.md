@@ -16,6 +16,16 @@ SDO proposes a different default:
 
 A work item should not advance merely because someone marked a task as complete. It advances when the conditions required by the next execution stage are explicitly satisfied or when a controlled exception has been formally authorized.
 
+## Actor-neutral execution
+
+A distinguishing objective of SDO is to separate the **work contract** from the **executor**.
+
+Where capability and authority permit, the same core Execution Specification should be able to govern work performed by a human, team, AI agent, software system, automation, external party, or hybrid combination without redefining the business obligation.
+
+> **Define the work once. Govern every executor by the contract.**
+
+Actor-specific controls remain possible through capability, authority, segregation-of-duties, verification, and execution-profile requirements.
+
 ## The SDO lifecycle
 
 ```text
@@ -57,7 +67,19 @@ When a specification cannot be satisfied, execution may enter a **Controlled Exc
 - [Execution Lifecycle](docs/05-execution-lifecycle.md)
 - [Controlled Exceptions](docs/06-controlled-exceptions.md)
 - [Glossary](docs/07-glossary.md)
+- [Minimum Viable Model](docs/08-minimum-viable-model.md)
+- [Execution Specification v0.1](spec/execution-spec-v0.1.md)
+- [Execution Specification YAML Template](templates/execution-spec.yaml)
+- [Novelty Assessment](research/novelty-assessment-v0.1.md)
 - [Research Notes](research/README.md)
+
+## Research position
+
+Current research shows substantial prior work in declarative BPM, artifact-centric processes, case management, policy-as-code, human-in-the-loop AI, agentic orchestration, and shared specifications for humans and AI in technical domains.
+
+The current SDO research hypothesis is therefore deliberately narrower: SDO may be differentiated by combining these mechanisms into a **general-purpose, technology-independent organizational methodology centered on actor-neutral Execution Specifications**.
+
+No claim of historical first invention is made at this stage.
 
 ## Status
 
