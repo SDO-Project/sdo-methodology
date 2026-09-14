@@ -2,7 +2,7 @@
 
 ## Execution Specification
 
-An **Execution Specification** defines the conditions under which a unit of work may be executed and verified.
+An **Execution Specification** defines an operational obligation and the conditions under which a concrete execution may be considered conformant.
 
 It may include:
 
@@ -15,28 +15,32 @@ It may include:
 - expected outputs;
 - evidence requirements;
 - exception rules;
+- handoff conditions;
 - version information.
 
 An Execution Specification is not necessarily a document. It may be represented by structured fields, schemas, forms, records, APIs, workflow definitions, or other machine- and human-readable forms.
 
+The specification SHOULD define the obligation independently from a particular executor or technology unless executor characteristics are themselves legitimate operational requirements.
+
 ## Execution Unit
 
-An **Execution Unit** is a bounded stage of work that receives validated inputs and is responsible for producing an expected output.
+An **Execution Unit** is a bounded operational responsibility governed by an Execution Specification.
+
+It exists to decompose a broader process into explicit obligations that can be validated, authorized, executed, verified, and handed off.
+
+## Execution Instance
+
+An **Execution Instance** is one concrete attempt to satisfy an applicable Execution Specification.
+
+It records what happened in that attempt, including the applicable specification version, actual inputs, executor metadata, authorization, runtime events, result, evidence, exceptions, verification, and handoff.
+
+The executor belongs to the Execution Instance rather than defining the obligation itself.
+
+## Executor
+
+An **Executor** is whoever or whatever performs a particular Execution Instance.
 
 Examples include:
-
-- prepare an implementation order;
-- approve a purchase;
-- schedule a technician;
-- deploy a system;
-- review a technical design;
-- process a customer request.
-
-## Execution Agent
-
-An **Execution Agent** performs work within an Execution Unit.
-
-The agent may be:
 
 - a person;
 - a team;
@@ -44,19 +48,49 @@ The agent may be:
 - a software service;
 - an automation;
 - a robot;
-- an AI agent.
+- an AI agent;
+- a machine;
+- a combination of multiple executors.
 
-SDO aims to make the execution model independent of agent type.
+In SDO, executor identity is secondary to specification conformance. It remains important where authority, accountability, capability, regulation, safety, security, or audit requires it.
+
+## Result
+
+A **Result** is the observable outcome produced by an Execution Instance.
+
+Execution completion alone does not make the result acceptable. The result must be evaluated against the applicable specification.
+
+## Conformance Evaluation
+
+**Conformance Evaluation** determines whether the Result and required Evidence satisfy the active specification.
+
+The central SDO rule is:
+
+```text
+Execution Success = Result conforms to Applicable Specification
+```
+
+Conceptually:
+
+```text
+Result ⊨ Specification
+```
+
+Minimum conformance outcomes are:
+
+```text
+PASS
+FAIL
+CONDITIONAL
+```
+
+A conditional outcome requires an approved Controlled Exception.
 
 ## Validation Gate
 
 A **Validation Gate** evaluates whether the conditions required to advance are satisfied.
 
-A gate may be:
-
-- automatic;
-- manual;
-- hybrid.
+A gate may be manual, automated, or implemented through any valid control mechanism.
 
 A gate should return an explicit result such as:
 
@@ -81,15 +115,15 @@ Authorization determines whether execution may proceed.
 
 ## Execution Contract
 
-An **Execution Contract** governs the transfer between two Execution Units.
+An **Execution Contract** governs the conditions under which responsibility may be transferred between Execution Units.
 
-It defines what the receiving unit requires before accepting responsibility for the work.
-
-An Execution Contract may reference one or more Execution Specifications.
+It is normally a projection of the applicable specification and receiving conditions rather than a separate source of operational truth.
 
 ## Verification
 
-**Verification** determines whether the result of execution satisfies the criteria defined by the active specification.
+**Verification** is the act of evaluating the produced Result and required Evidence against the applicable Execution Specification.
+
+Verification produces or supports a Conformance Evaluation.
 
 ## Evidence
 
@@ -105,18 +139,42 @@ Examples include:
 - photos;
 - logs;
 - generated reports;
-- customer acceptance.
+- customer acceptance;
+- provenance records.
 
 Evidence requirements should be proportional to operational risk.
 
 ## Handoff
 
-A **Handoff** is the validated transfer of responsibility between Execution Units.
+A **Handoff** is the validated transfer of responsibility, result, and required context between Execution Units.
 
-In SDO, a handoff should not be inferred merely from task status. It occurs when the receiving conditions are met or a Controlled Exception authorizes the transfer.
+In SDO, a handoff should not be inferred merely from task status. It occurs when receiving conditions are met or a Controlled Exception explicitly authorizes transfer.
 
 ## Controlled Exception
 
 A **Controlled Exception** is an explicit, justified, authorized, limited, and traceable deviation from the normal specification.
 
 Exceptions are part of the formal model, not an informal bypass around it.
+
+## Trace
+
+A **Trace** is the ordered, attributable history of material events connecting specification, validation, authorization, execution, result, evidence, exceptions, conformance, and handoff.
+
+The trace supports accountability, auditability, diagnosis, learning, and specification improvement.
+
+## Structural rule
+
+SDO separates three layers:
+
+```text
+OBLIGATION
+Execution Specification
+
+EXECUTION
+Execution Instance
+
+CONFORMANCE
+Result + Evidence vs Specification
+```
+
+This separation allows executors, technologies, and implementation mechanisms to change without redefining the operational obligation when the required result and governing conditions remain the same.
