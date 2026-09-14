@@ -26,17 +26,17 @@ Verifiable information used to support verification, approval, completion, excep
 
 ## Execution Contract
 
-The structured set of conditions governing a transfer of responsibility between Execution Units. In SDO, it is typically a projection of the applicable specification and downstream receiving conditions rather than a separate source of truth.
+The structured set of conditions governing a transfer of responsibility between Execution Units. In SDO, it is typically a projection of the applicable specification and downstream Receiving Conditions rather than a separate source of truth.
 
 ## Execution Instance
 
 One concrete attempt to satisfy an applicable Execution Specification.
 
-It records the actual inputs, authorization, executor metadata, runtime events, result, evidence, exceptions, verification, conformance outcome, and handoff outcome for that attempt.
+It records the actual inputs, authorization, executor metadata, runtime events, Result, Evidence, exceptions, verification, Conformance Evaluation, and Handoff outcome for that attempt.
 
 ## Execution Specification
 
-The authoritative definition of an operational obligation, including the conditions, data, rules, dependencies, constraints, expected outputs, acceptance criteria, evidence, exception policy, and handoff requirements relevant to execution.
+The authoritative definition of an operational obligation, including the conditions, data, rules, dependencies, constraints, expected outputs, acceptance criteria, Evidence, exception policy, and Handoff requirements relevant to execution.
 
 ## Execution State
 
@@ -54,15 +54,39 @@ Executor identity belongs to the execution, not to the obligation itself, unless
 
 ## Handoff
 
-A validated transfer of a Result and required context from one Execution Unit or process boundary to another.
+A governed and validated transfer of responsibility, Result, and required context from one execution boundary to another.
+
+A notification or message is not, by itself, a Handoff.
+
+## Handoff Record
+
+The canonical information set representing a transfer of responsibility in SDO.
+
+It identifies the governing specification and version, source execution, Result, Evidence, approved exceptions, source and target boundaries, Receiving Conditions, transfer status, and Trace context.
+
+The Handoff Record is a semantic structure, not necessarily a specific file, form, database entity, or API payload.
+
+## Implementation Minimalism
+
+The SDO adoption principle that organizations should use existing systems before introducing new technology, provided those systems can preserve the required SDO semantics with acceptable reliability and risk control.
+
+Technology should be added when it materially improves enforcement, scale, reliability, integration, Traceability, or risk management—not merely to claim SDO compliance.
 
 ## Living Specification
 
 A specification that evolves explicitly and versionably as operational reality changes.
 
+## Notification
+
+A communication indicating that work, information, or a state change exists.
+
+A Notification may trigger attention but does not itself transfer responsibility unless the required Handoff conditions are also satisfied.
+
 ## Receiving Conditions
 
-The conditions that must be true before a downstream Execution Unit accepts responsibility for work.
+The explicit conditions that must be true before a downstream execution boundary accepts responsibility for work.
+
+Receiving Conditions are defined from the needs of the receiving boundary rather than unilaterally by the sender.
 
 ## Result
 
@@ -72,11 +96,11 @@ A Result is not considered successful merely because execution ended; it must sa
 
 ## Specification Version
 
-The identifiable version of an Execution Specification that governed a particular validation, authorization, execution, verification, or handoff decision.
+The identifiable version of an Execution Specification that governed a particular validation, authorization, execution, verification, or Handoff decision.
 
 ## Trace
 
-The ordered, attributable history of material lifecycle events connecting specification, validation, authorization, execution, result, evidence, exceptions, conformance, and handoff.
+The ordered, attributable history of material lifecycle events connecting specification, validation, authorization, execution, Result, Evidence, exceptions, conformance, and Handoff.
 
 ## Validation
 
