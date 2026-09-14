@@ -22,6 +22,7 @@ The project is currently in pre-release conceptual development. Version numbers 
   - Trace.
 - Clarified that executor identity remains relevant only when authority, law, certification, safety, access, accountability, segregation of duties, or policy legitimately requires it.
 - Repositioned SDO as a **general-purpose and implementation-independent methodology** rather than a methodology specifically for hybrid human-agent operations.
+- Aligned Core Concepts and Glossary with executor independence and conformance-based success.
 
 ### Added
 
@@ -29,6 +30,20 @@ The project is currently in pre-release conceptual development. Version numbers 
 - Executor Independence as a foundational principle.
 - Minimum Viable Model for generic adoption.
 - Initial Execution Specification reference model and YAML template.
+- **SDO Core Model v0.1**, defining eight core entities:
+  - Execution Specification;
+  - Execution Instance;
+  - Result;
+  - Evidence;
+  - Conformance Evaluation;
+  - Controlled Exception;
+  - Handoff;
+  - Trace.
+- Formal core relations and minimum cardinalities.
+- Ten Core Model invariants, including specification identity, obligation independence, result-before-success, conformance-based success, evidence integrity, exception visibility, version traceability, handoff validity, executor traceability when required, and implementation independence.
+- Three-layer structural separation: **Obligation → Execution → Conformance**.
+- Abstract conformance rule for minimum SDO execution success.
+- Minimum structural SDO conformance criteria.
 - Novelty and differentiation research notes.
 - Explicit publication philosophy: `Concept Draft → Public Draft → Release Candidate → 1.0`.
 - **Creative Commons Attribution 4.0 International (CC BY 4.0)** licensing for methodology documentation, templates, diagrams, and research notes unless otherwise noted.
