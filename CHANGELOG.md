@@ -2,7 +2,31 @@
 
 All notable conceptual changes to SDO will be documented here.
 
-The project is currently in pre-release conceptual development. Version numbers below refer to methodology drafts, not software releases.
+Version numbers below refer to methodology drafts, not software releases.
+
+## [0.3] — 2026-09-14
+
+### Changed
+
+- Promoted SDO from **Concept Draft** to **Public Draft**.
+- Reframed the repository for external testing, criticism, adaptation, and community feedback.
+- Added a concise `Start here` path in the README for first-time readers.
+
+### Added
+
+- **Generic End-to-End Example**, showing a complete implementation-independent flow from Execution Specification through validation, authorization, execution, result, conformance, Handoff Record, Receiving Conditions, and acceptance.
+- `CONTRIBUTING.md` with guidance for:
+  - conceptual criticism;
+  - real-world experiments;
+  - failed adoption reports;
+  - implementation patterns;
+  - prior-art references;
+  - documentation and model improvements.
+- Public invitation: **Try it. Challenge it. Adapt it. Share what worked and what did not.**
+
+### Status
+
+**Public Draft v0.3.** SDO is intentionally open for testing and challenge. It is not a finished standard.
 
 ## [0.2] — 2026-09-14
 
