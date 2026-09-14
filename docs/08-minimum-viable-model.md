@@ -1,14 +1,14 @@
 # SDO Minimum Viable Model
 
-> **Concept Draft v0.1**
+> **Concept Draft v0.2**
 
-The Minimum Viable Model (MVM) defines the smallest complete form of **Specification-Driven Operations (SDO)** that can be applied to any organizational process without depending on a specific industry, department, software platform, or execution technology.
+The Minimum Viable Model (MVM) defines the smallest complete form of **Specification-Driven Operations (SDO)** that can be applied to any organizational process without depending on industry, department, software platform, workflow technology, or executor type.
 
-The model is intentionally generic. It is designed to govern work executed by people, teams, software systems, automations, AI agents, suppliers, or combinations of these actors under the same operational logic.
+SDO governs **execution against a specification**. The methodology is intentionally independent from who or what performs the work.
 
 ## 1. Core proposition
 
-A unit of work should not begin, advance, or be transferred solely because someone or something declares it ready. It should advance because the conditions defined by an explicit specification have been satisfied, or because a controlled exception has been formally authorized.
+A unit of work should not begin, advance, be accepted, or be transferred merely because an executor declares it ready or complete. It advances because the conditions defined by an explicit specification have been satisfied, or because a controlled exception has been formally authorized.
 
 The minimum SDO lifecycle is:
 
@@ -28,46 +28,53 @@ HANDOFF
 
 A controlled exception path may be entered whenever the normal specification cannot be satisfied.
 
-## 2. Actor-neutral execution
+## 2. Executor Independence
 
-The SDO MVM separates **what must be true** from **who or what performs the work**.
+SDO separates the **obligation** from the **executor**.
 
-An Execution Specification defines the required outcome, inputs, constraints, evidence, acceptance criteria, and handoff conditions. It should not depend unnecessarily on whether the executor is a human, an AI agent, a software service, a robot, or a mixed team.
+The Execution Specification defines what must be true: required inputs, preconditions, constraints, expected result, acceptance criteria, evidence requirements, exception policy, and handoff conditions.
 
-This creates an **actor-neutral execution contract**.
+The executor is a property of an **Execution Instance**, not a defining property of the obligation.
 
 ```text
-                    EXECUTION SPEC
-                          │
-              ┌───────────┼───────────┐
-              │           │           │
-            HUMAN      AI AGENT     SYSTEM
-              │           │           │
-              └───────────┼───────────┘
-                          │
-                     SAME OUTCOME
-                     SAME EVIDENCE
-                     SAME GATES
+EXECUTION SPECIFICATION
+        │
+        ▼
+ EXECUTION INSTANCE
+        │
+        ▼
+      RESULT
+        │
+        ▼
+CONFORMANCE CHECK
+     /      \
+   PASS      FAIL
+    │          │
+    ▼          ▼
+ HANDOFF   REWORK / EXCEPTION
 ```
 
-Actor neutrality does not mean every actor is interchangeable. A specification may impose capability, authority, certification, segregation-of-duties, or human-approval requirements. The principle is that these restrictions are declared as part of the specification rather than hidden inside an informal operating convention.
+A human, team, AI agent, software service, automation, robot, supplier, or other mechanism may produce the result. SDO evaluates the result and evidence against the same applicable specification.
+
+> **Execution is judged by conformance to the specification, not by the identity of the executor.**
+
+Executor independence does not override legitimate governance requirements. A specification or policy may require a certification, authority level, segregation of duties, licensed professional, human approval, approved system, or other execution restriction. These are explicit constraints on a particular execution; they do not make executor identity the foundation of the methodology.
 
 ## 3. Minimum entities
 
-An SDO implementation requires only six conceptual entities.
+An SDO implementation requires the following conceptual entities.
 
 ### 3.1 Execution Specification
 
-The authoritative definition of the work to be performed and the conditions that govern it.
+The authoritative definition of the obligation and the conditions that govern successful execution.
 
 Minimum contents:
 
-- purpose or intended outcome;
+- intended outcome;
 - required inputs;
 - preconditions;
 - constraints and business rules;
-- required capabilities or authorities;
-- expected outputs;
+- required outputs or resulting state;
 - acceptance criteria;
 - required evidence;
 - exception policy;
@@ -76,43 +83,83 @@ Minimum contents:
 
 ### 3.2 Execution Unit
 
-A bounded unit of work governed by one Execution Specification.
+A bounded unit of work governed by one applicable Execution Specification.
 
-An Execution Unit may represent a task, decision, service, review, operation, approval, analysis, delivery, or any other meaningful work boundary.
+An Execution Unit may represent a task, decision, service, review, operation, approval, analysis, delivery, calculation, transformation, or any other meaningful work boundary.
 
-### 3.3 Execution Agent
+### 3.3 Execution Instance
 
-The actor performing the Execution Unit.
+A concrete occurrence of an Execution Unit performed under a specific version of an Execution Specification.
 
-Supported conceptual actor classes:
+The Execution Instance records operational facts such as:
 
-- human;
-- team;
-- AI agent;
-- software system;
-- automation or robot;
-- external party;
-- hybrid combination.
+- execution identifier;
+- applicable specification and version;
+- executor identity or mechanism, when traceability requires it;
+- timestamps;
+- inputs used;
+- output/result produced;
+- evidence;
+- decisions;
+- exceptions;
+- verification outcome;
+- trace.
 
-### 3.4 Validation Gate
+The executor belongs here because it describes **how a particular execution occurred**, not **what the obligation means**.
 
-A deterministic or reviewable control that decides whether the work is eligible to enter the next state.
+### 3.4 Result
 
-A gate evaluates facts against the current specification. A gate should not silently reinterpret the specification.
+The observable output, state change, decision, artifact, service outcome, or other effect produced by an Execution Instance.
 
-### 3.5 Evidence
+The Result is evaluated for conformance against the applicable specification.
 
-Information sufficient to support a verification decision.
+### 3.5 Validation Gate
 
-Evidence may include structured data, documents, measurements, logs, signatures, records, test results, approvals, generated artifacts, or other verifiable facts.
+A deterministic or reviewable control that determines whether the required conditions for advancement are satisfied.
 
-### 3.6 Controlled Exception
+A gate evaluates facts against the current specification. It must not silently reinterpret the specification.
 
-A formally declared deviation from the normal specification.
+### 3.6 Evidence
 
-An exception must have an explicit reason, scope, approver or authority, risk treatment, validity, and traceable resolution.
+Information sufficient to support a validation or verification decision.
 
-## 4. Minimum states
+Evidence may include structured data, documents, measurements, logs, signatures, records, tests, approvals, generated artifacts, sensor values, or other verifiable facts.
+
+### 3.7 Controlled Exception
+
+A formally declared deviation from the normal specification or policy.
+
+An exception must have an explicit reason, scope, authority, risk treatment, validity, and traceable resolution.
+
+### 3.8 Handoff
+
+The governed transfer of a verified result and its required context into another Execution Unit or terminal destination.
+
+## 4. Conformance rule
+
+The central SDO success condition is:
+
+```text
+Execution Success = Result conforms to Applicable Specification
+```
+
+Conceptually:
+
+```text
+Result ⊨ Specification
+```
+
+Executor identity may affect authorization, accountability, or regulatory eligibility, but successful completion is established by satisfying the applicable specification and required evidence.
+
+Therefore:
+
+```text
+Specification ≠ Executor
+Execution ≠ Executor
+Correctness ≠ Executor Identity
+```
+
+## 5. Minimum states
 
 The MVM uses the following canonical states:
 
@@ -138,56 +185,56 @@ REJECTED
 CANCELLED
 ```
 
-Organizations may add states, but an implementation should preserve the semantic distinction between validation, authorization, execution, and verification.
+Organizations may add states, but an implementation should preserve the semantic distinction between validation, authorization, execution, verification, exception, and completion.
 
-## 5. Lifecycle rules
+## 6. Lifecycle rules
 
 ### SPECIFY
 
 Create or select the applicable Execution Specification.
 
-Output: a versioned specification that is complete enough to be validated.
+Output: a versioned specification complete enough to be validated.
 
 ### VALIDATE
 
-Evaluate whether required inputs, preconditions, constraints, and eligibility conditions are satisfied.
+Evaluate whether required inputs, preconditions, constraints, and applicable policy conditions are satisfied.
 
 Output: `VALIDATED`, `BLOCKED`, or `EXCEPTION_REQUESTED`.
 
 ### AUTHORIZE
 
-Determine whether execution is allowed to begin.
+Determine whether execution is permitted to begin.
 
-Validation answers: **Can this work proceed according to the specification?**
+Validation answers: **Are the conditions defined by the specification satisfied?**
 
-Authorization answers: **Is this work permitted to proceed now and under this authority?**
+Authorization answers: **May this execution proceed now under the applicable authority and policies?**
 
 Output: `AUTHORIZED`, `CONDITIONALLY_AUTHORIZED`, or `REJECTED`.
 
 ### EXECUTE
 
-The assigned Execution Agent performs the work within the specification boundaries.
+An executor or execution mechanism performs the work within the applicable constraints and produces a result.
 
-The executor may choose implementation details when the specification leaves them open, but may not silently redefine the required outcome or constraints.
+SDO does not prescribe the internal implementation method unless that method is itself constrained by the specification or policy.
 
 ### VERIFY
 
-Evaluate produced outputs and evidence against acceptance criteria.
+Evaluate the produced result and evidence against the acceptance criteria.
 
-Output: `VERIFIED`, return for rework, or enter an exception path.
+Output: `VERIFIED`, rework, rejection, or controlled exception.
 
 ### HANDOFF
 
-Transfer the verified output and required context to the next Execution Unit.
+Transfer the verified result and required context to the next Execution Unit or terminal destination.
 
-A handoff is complete only when the receiving unit's entry conditions are satisfied or a controlled exception explicitly allows the transfer.
+A handoff is complete only when the receiving entry conditions are satisfied or a controlled exception explicitly permits the transfer.
 
-## 6. Controlled exception path
+## 7. Controlled exception path
 
 An exception is not an escape from SDO. It is an explicit execution state governed by SDO.
 
 ```text
-VALIDATION FAILURE
+CONDITION NOT SATISFIED
        ↓
 EXCEPTION REQUEST
        ↓
@@ -203,7 +250,7 @@ AUTHORIZATION
 
 Minimum exception record:
 
-- requirement or condition not satisfied;
+- condition not satisfied;
 - reason;
 - affected scope;
 - risk or impact;
@@ -216,52 +263,39 @@ Minimum exception record:
 
 **Principle:** SDO does not eliminate exceptions. It eliminates invisible exceptions.
 
-## 7. Handoff contract
+## 8. Handoff contract
 
-Every inter-unit transfer has a minimum handoff contract.
+Every governed transfer has a minimum handoff contract.
 
-The sender must provide:
+The sending execution must provide:
 
-- verified output;
+- verified result;
 - required evidence;
 - current specification version;
 - unresolved conditions, if any;
 - approved exceptions, if any;
 - traceability identifiers.
 
-The receiver must be able to determine, without relying on undocumented conversation, whether its entry conditions are satisfied.
+The receiving unit must be able to determine, without relying on undocumented conversation, whether its entry conditions are satisfied.
 
-## 8. Executor eligibility
+## 9. Execution restrictions
 
-SDO distinguishes the **work contract** from **executor eligibility**.
+SDO is executor-independent by default, but not executor-blind.
 
-A specification may state:
+When necessary, policies or specifications may constrain an execution through requirements such as:
 
-```text
-eligible_executor_classes:
-  - human
-  - ai_agent
-```
+- required capability;
+- approval authority;
+- professional certification or license;
+- approved technology or environment;
+- segregation of duties;
+- mandatory human decision;
+- prohibited executor class;
+- independent verifier requirement.
 
-or impose capabilities:
+These restrictions should be explicit and justifiable. They constrain eligibility for a specific execution without redefining the fundamental work obligation around an executor class.
 
-```text
-required_capabilities:
-  - financial_approval_level_2
-  - access_to_customer_record
-```
-
-This allows executor substitution without rewriting the process when two different actor classes are legitimately capable of satisfying the same specification.
-
-Examples:
-
-- a human analyst or an AI agent may classify a low-risk document if both satisfy the same acceptance and evidence requirements;
-- a payment approval may require a named human authority even if an AI agent prepares the recommendation;
-- an automated system may execute a calculation while a human or AI agent verifies anomalous results.
-
-The specification, not the actor type, defines the operational truth.
-
-## 9. Proportional governance
+## 10. Proportional governance
 
 Not every unit of work needs the same level of rigor.
 
@@ -271,7 +305,7 @@ The MVM permits three implementation levels:
 
 For low-risk, reversible work.
 
-Minimum: inputs, expected output, acceptance criteria, trace.
+Minimum: inputs, expected result, acceptance criteria, trace.
 
 ### Level B — Controlled
 
@@ -283,31 +317,32 @@ Adds explicit validation, authorization, evidence, versioning, and exception han
 
 For high-impact, regulated, safety-critical, financial, or irreversible work.
 
-Adds independent verification, segregation of duties, stronger evidence retention, explicit authority boundaries, and possibly mandatory human control.
+Adds independent verification, segregation of duties, stronger evidence retention, explicit authority boundaries, and any mandatory executor restrictions required by policy or regulation.
 
 The SDO model remains the same; rigor scales with risk.
 
-## 10. Minimum traceability
+## 11. Minimum traceability
 
 Every execution should be able to answer:
 
-- What specification governed this work?
+- What specification governed this execution?
 - Which version?
 - What inputs were used?
-- Who or what executed it?
+- What execution instance produced the result?
+- Who or what executed it, when that fact is required for traceability?
 - What authority allowed execution?
-- What output was produced?
-- What evidence supports completion?
+- What result was produced?
+- What evidence supports conformance?
 - Which gates were passed?
 - Were exceptions used?
-- Who or what verified the result?
+- How was the result verified?
 - What was handed off next?
 
 The implementation technology may vary, but these questions define the minimum traceability target.
 
-## 11. Technology independence
+## 12. Technology and executor independence
 
-SDO is a methodology, not a workflow engine.
+SDO is a methodology, not a workflow engine and not an automation framework.
 
 The MVM may be implemented with:
 
@@ -317,36 +352,41 @@ The MVM may be implemented with:
 - BPM/workflow engines;
 - databases and APIs;
 - policy engines;
-- AI agent orchestration platforms;
-- custom software.
+- AI orchestration platforms;
+- industrial automation;
+- custom software;
+- combinations of these mechanisms.
 
-A mature implementation may automate gates and evidence collection, but software automation is not required for a process to follow SDO.
+Likewise, the execution itself may be performed by any mechanism capable and authorized to satisfy the specification.
 
-## 12. Minimum adoption path
+A change of executor should not require a change to the core specification unless that change alters the obligation, constraints, evidence, or governance requirements.
+
+## 13. Minimum adoption path
 
 A generic SDO pilot can be created with seven steps:
 
-1. Select one bounded process or workflow.
+1. Select one bounded process or operational flow.
 2. Identify its meaningful Execution Units.
-3. Define one Execution Specification per unit or reusable unit type.
+3. Define the expected result and one Execution Specification per unit or reusable unit type.
 4. Define validation and authorization gates.
-5. Define evidence and acceptance criteria.
+5. Define acceptance criteria and evidence.
 6. Define controlled exception rules.
-7. Run executions and use exception/rework data to improve the specifications.
+7. Execute, verify conformance, and use exception/rework data to improve the specifications.
 
-The first objective is not maximal automation. It is to replace ambiguous execution boundaries with explicit, testable contracts.
+The first objective is not maximal automation. It is to replace ambiguous execution boundaries with explicit, testable specifications.
 
-## 13. Success criteria for an SDO MVP
+## 14. Success criteria for an SDO MVP
 
 An implementation qualifies as an SDO MVP when:
 
 - at least one process is decomposed into explicit Execution Units;
 - each governed unit has a versioned Execution Specification;
-- advancement depends on a gate rather than status declaration alone;
+- advancement depends on applicable gates rather than status declaration alone;
+- verification evaluates the produced result against explicit acceptance criteria;
 - completion is supported by defined evidence;
 - exceptions are explicit and traceable;
 - handoffs expose enough information for the receiving unit to validate entry;
-- executor identity and class are recorded;
-- the specification can, where capability and authority allow, govern more than one executor class without redefining the work contract.
+- execution traceability can identify the actual executor when required;
+- replacing one eligible executor with another does not require redefining the core work obligation.
 
-That final criterion is the foundation for hybrid human-agent operations.
+That final criterion expresses the executor independence of SDO and is one of the methodology's central portability properties.
