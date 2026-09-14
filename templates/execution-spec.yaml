@@ -1,6 +1,6 @@
 spec_id: EXAMPLE-001
 name: Example Execution Unit
-version: 0.1
+version: 0.2
 status: draft
 owner: <spec_owner>
 effective_from: null
@@ -29,14 +29,12 @@ constraints:
   time_constraints: []
   resource_constraints: []
 
-executor:
-  eligible_executor_classes:
-    - human
-    - ai_agent
-    - software_system
+# Optional. Use only when executor-related restrictions are truly required.
+execution_restrictions:
   required_capabilities: []
   authority_requirements: []
   segregation_rules: []
+  executor_constraints: []
 
 outputs:
   required_outputs:
@@ -49,7 +47,7 @@ acceptance:
     - id: AC-001
       criterion: <observable_success_condition>
       required: true
-  verification_method: <automatic|human_review|independent_review|mixed>
+  verification_method: <automatic|review|independent_review|mixed>
   verifier_requirements: []
 
 evidence:
@@ -73,7 +71,7 @@ exceptions:
 
 handoff:
   handoff_requirements:
-    - verified_output
+    - verified_result
     - evidence_refs
     - spec_version
     - approved_exceptions
@@ -86,22 +84,14 @@ traceability:
     - execution_id
     - spec_id
     - spec_version
-    - executor_identity
-    - executor_class
+    - executor_identity_if_required
     - validation_result
     - authorization_result
     - execution_start
     - execution_end
+    - result_refs
     - verification_result
     - exception_records
     - evidence_refs
     - handoff_result
   source_references: []
-
-execution_profiles:
-  human:
-    additional_requirements: []
-  ai_agent:
-    additional_requirements: []
-  software_system:
-    additional_requirements: []
