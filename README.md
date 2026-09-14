@@ -71,11 +71,14 @@ When a specification cannot be satisfied, execution may enter a **Controlled Exc
 - **Execution Unit** — a bounded unit of governed work.
 - **Execution Instance** — a concrete attempt to satisfy an Execution Specification.
 - **Result** — the output, decision, state change, service, or other observable outcome produced by an Execution Instance.
+- **Conformance Evaluation** — the determination of whether the Result and required Evidence satisfy the applicable specification.
 - **Validation Gate** — the mechanism that determines whether required conditions are satisfied before advancement.
 - **Evidence** — objective information used to support a conformance or verification decision.
 - **Controlled Exception** — a formally declared and authorized deviation from the normal specification.
 - **Handoff** — a validated transfer of a conformant result and required context to the next execution boundary.
 - **Trace** — the auditable history linking specification, execution, result, evidence, decisions, exceptions, and handoff.
+
+The formal relationships, invariants, and minimum conformance rules are defined in the [SDO Core Model v0.1](docs/10-core-model.md).
 
 ## Open methodology
 
@@ -103,7 +106,8 @@ Unless otherwise noted, the methodology documentation, templates, diagrams, and 
 - [Glossary](docs/07-glossary.md)
 - [Minimum Viable Model](docs/08-minimum-viable-model.md)
 - [Open Methodology Philosophy](docs/09-open-methodology.md)
-- [Execution Specification v0.1](spec/execution-spec-v0.1.md)
+- [SDO Core Model v0.1](docs/10-core-model.md)
+- [Execution Specification v0.2](spec/execution-spec-v0.1.md)
 - [Execution Specification YAML Template](templates/execution-spec.yaml)
 - [Novelty Assessment](research/novelty-assessment-v0.1.md)
 - [Executor Independence Differentiation](research/executor-independence-differentiation-v0.1.md)
