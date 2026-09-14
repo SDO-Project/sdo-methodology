@@ -1,16 +1,20 @@
-# Execution Specification v0.1
+# Execution Specification v0.2
 
 > **Normative concept draft for SDO**
 
 An **Execution Specification** is the authoritative operational contract for one bounded unit of work under Specification-Driven Operations (SDO).
 
-Its purpose is to make execution independent from undocumented assumptions and, where appropriate, independent from executor type.
+Its purpose is to define the obligation and the conditions for successful execution independently from undocumented assumptions and, by default, independently from executor identity.
 
 ## 1. Design goal
 
-An Execution Specification should define **what must be true before, during, and after execution** without over-prescribing how the executor performs the work.
+An Execution Specification defines **what must be true before, during, and after execution** without unnecessarily prescribing who performs the work or how the work is internally implemented.
 
-A valid specification is therefore outcome-oriented, constraint-aware, verifiable, versioned, and executable by any eligible actor with the required capabilities and authority.
+A valid specification is outcome-oriented, constraint-aware, verifiable, versioned, and portable across eligible execution mechanisms.
+
+The central rule is:
+
+> **Execution is judged by conformance to the specification, not by the identity of the executor.**
 
 ## 2. Canonical structure
 
@@ -49,12 +53,14 @@ Every Execution Specification SHOULD define the following fields.
 - `time_constraints` — deadlines, windows, or sequencing constraints;
 - `resource_constraints` — resource, environment, or system conditions.
 
-### Executor eligibility
+### Execution restrictions
 
-- `eligible_executor_classes` — human, team, ai_agent, software_system, automation, external_party, hybrid;
+Execution restrictions are OPTIONAL and SHOULD only be used when executor-related requirements are operationally, legally, contractually, or risk-relevantly necessary.
+
 - `required_capabilities` — skills, permissions, certifications, tools, or access;
 - `authority_requirements` — decision or approval authority required;
-- `segregation_rules` — restrictions between executor, approver, or verifier.
+- `segregation_rules` — restrictions between executor, approver, or verifier;
+- `executor_constraints` — permitted or prohibited executor classes only when explicitly justified.
 
 ### Output
 
@@ -64,8 +70,8 @@ Every Execution Specification SHOULD define the following fields.
 ### Acceptance
 
 - `acceptance_criteria` — observable criteria used to determine success;
-- `verification_method` — deterministic check, human review, independent agent review, test, measurement, or combination;
-- `verifier_requirements` — eligibility rules for verification.
+- `verification_method` — deterministic check, review, test, measurement, or combination;
+- `verifier_requirements` — eligibility rules for verification when applicable.
 
 ### Evidence
 
@@ -100,97 +106,106 @@ Execution MUST NOT be authorized without an applicable specification or an expli
 
 Required inputs and preconditions MUST be evaluated before normal authorization.
 
-### 3.3 Authority is distinct from capability
+### 3.3 Executor independence by default
 
-An actor may be capable of performing work but not authorized to perform it.
+The core work obligation MUST NOT depend on executor identity unless identity or executor class is itself a legitimate requirement.
 
-### 3.4 Evidence before completion
+The executor belongs to the Execution Instance. The obligation belongs to the Execution Specification.
+
+### 3.4 Result-based conformance
+
+Successful execution MUST be established by evaluating the produced result and required evidence against the applicable specification.
+
+Conceptually:
+
+```text
+Execution Success = Result conforms to Applicable Specification
+```
+
+### 3.5 Capability and authority remain explicit
+
+Executor independence does not remove governance. An execution MAY be constrained by capabilities, authority, certification, segregation of duties, approved technology, or mandatory human control where justified.
+
+### 3.6 Evidence before completion
 
 Where evidence is required, the work MUST NOT transition to `VERIFIED` solely from an executor declaration.
 
-### 3.5 Exceptions are first-class records
+### 3.7 Exceptions are first-class records
 
 A waived or deviated condition MUST NOT disappear from the execution history.
 
-### 3.6 Specification version immutability during an execution decision
+### 3.8 Specification version immutability during an execution decision
 
 The specification version used to authorize execution MUST be recorded. If a material specification change affects active work, the applicable change policy MUST determine whether revalidation is required.
 
-### 3.7 Actor neutrality by default
-
-The specification SHOULD avoid coupling the work definition to a particular actor class unless the actor class is itself a legitimate operational requirement.
-
-## 4. Actor-neutrality rule
+## 4. Executor-independence rule
 
 The following question should be applied when authoring each requirement:
 
-> Is this requirement about the work, or merely about how the work happens to be performed today?
+> **Is this requirement about the obligation and expected result, or only about how the work happens to be performed today?**
 
-Requirements about the work belong in the core Execution Specification.
+Requirements about the obligation belong in the core Execution Specification.
 
-Requirements that arise from a particular executor implementation SHOULD be isolated as capability, authority, adapter, or execution-profile constraints.
+Requirements caused only by a particular implementation SHOULD remain outside the core obligation unless they are necessary constraints.
 
 Example:
 
-**Coupled:**
+**Executor-coupled:**
 
 > The analyst must open System X and manually compare fields A and B.
 
-**Actor-neutral:**
+**Executor-independent:**
 
 > Fields A and B must be compared using the current approved records. A mismatch must be recorded and classified before completion.
 
-The second definition can be satisfied by an eligible human, AI agent, or deterministic system while preserving the same business obligation.
+The second definition preserves the business obligation while allowing any authorized execution mechanism capable of producing a conforming result.
 
-## 5. Execution profiles
+## 5. Execution Instance boundary
 
-An Execution Specification MAY define actor-specific profiles when different executor classes require additional controls without changing the core outcome.
+The specification defines the obligation. The Execution Instance records what actually happened.
 
-Example:
+A concrete execution may record:
 
 ```yaml
-execution_profiles:
-  human:
-    additional_requirements:
-      - complete_training_X
-
-  ai_agent:
-    additional_requirements:
-      - approved_model_class
-      - tool_calls_logged
-      - human_approval_if_risk_score_gt_70
+execution_id: EXEC-000123
+spec_id: EXAMPLE-001
+spec_version: 0.2
+executor:
+  identity: <human|team|agent|system|service|robot|external_party|other>
+  reference: <traceable_identity_if_required>
+started_at: <timestamp>
+completed_at: <timestamp>
+result_refs: []
+evidence_refs: []
+exceptions: []
 ```
 
-Profiles extend the common contract. They SHOULD NOT silently weaken core acceptance criteria.
+Changing the executor SHOULD NOT require a new specification version unless that change modifies the obligation, constraints, evidence, risk treatment, or governance requirements.
 
 ## 6. Validation result
 
 A validation result should be represented independently from the specification itself.
 
-Minimum result:
-
 ```yaml
 spec_id: EXAMPLE-001
-spec_version: 0.1
+spec_version: 0.2
 execution_id: EXEC-000123
 validation_status: passed | failed | exception_required
 validated_at: 2026-01-01T10:00:00Z
-validator: <identity>
+validator: <identity_or_mechanism>
 failed_conditions: []
 evidence_refs: []
 ```
 
 ## 7. Verification result
 
-Minimum result:
-
 ```yaml
 spec_id: EXAMPLE-001
-spec_version: 0.1
+spec_version: 0.2
 execution_id: EXEC-000123
 verification_status: passed | failed | conditional
 verified_at: 2026-01-01T12:00:00Z
-verifier: <identity>
+verifier: <identity_or_mechanism>
 criteria_results: []
 evidence_refs: []
 exceptions: []
@@ -198,23 +213,24 @@ exceptions: []
 
 ## 8. Portability target
 
-The conceptual specification is intentionally implementation-neutral. It may later be expressed as JSON Schema, YAML, database entities, workflow forms, policy code, BPMN extensions, APIs, or other machine-readable formats.
+The conceptual specification is implementation-neutral. It may be expressed as JSON Schema, YAML, database entities, workflow forms, policy code, BPMN extensions, APIs, or other machine-readable formats.
 
-The methodology should preserve semantic compatibility even when the implementation technology changes.
+The methodology should preserve semantic compatibility even when implementation technology or executor changes.
 
 ## 9. Minimal conformance
 
-A specification is minimally conformant with SDO v0.1 when it defines:
+A specification is minimally conformant with SDO v0.2 when it defines:
 
 1. identity and version;
 2. intended outcome;
 3. required inputs and preconditions;
 4. constraints;
-5. executor eligibility;
-6. required output;
-7. acceptance criteria;
-8. evidence requirements;
-9. exception policy;
-10. handoff/completion conditions.
+5. required output or resulting state;
+6. acceptance criteria;
+7. evidence requirements;
+8. exception policy;
+9. handoff/completion conditions.
+
+Executor eligibility is not a mandatory element of the core specification. Executor-related restrictions are added only when required by governance, risk, law, contract, capability, or policy.
 
 This minimal contract is the reusable foundation of an SDO process.
