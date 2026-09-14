@@ -1,6 +1,6 @@
 # SDO — Specification-Driven Operations
 
-> **Concept Draft v0.2**
+> **Public Draft v0.3**
 
 **Specification-Driven Operations (SDO)** is an open methodology proposal for modern organizational execution.
 
@@ -114,6 +114,18 @@ These are implementation options, not mandatory maturity stages. A manual implem
 
 This adoption principle is called **Implementation Minimalism**.
 
+## Start here
+
+If you want to understand SDO quickly, read these first:
+
+1. [Manifesto](MANIFESTO.md)
+2. [Generic End-to-End Example](examples/generic-end-to-end.md)
+3. [SDO Core Model v0.1](docs/10-core-model.md)
+4. [SDO Handoff Model v0.1](docs/11-handoff-model.md)
+5. [SDO Adoption Model v0.1](docs/12-adoption-model.md)
+
+The generic example shows the complete flow from specification to validation, execution, conformance, handoff, and acceptance without requiring a specific industry or software platform.
+
 ## Open methodology
 
 SDO is intended to be **open, adaptable, implementation-independent, and usable across organizational contexts**.
@@ -125,6 +137,10 @@ Organizations may implement SDO using forms, spreadsheets, ERP/CRM systems, BPM 
 > **Adapt the implementation. Preserve the principles.**
 
 Use, experimentation, criticism, adaptation, and publication of implementation patterns are encouraged.
+
+> **Try it. Challenge it. Adapt it. Share what worked and what did not.**
+
+See [CONTRIBUTING.md](CONTRIBUTING.md) for ways to report experiments, failures, conceptual issues, prior art, and proposed improvements.
 
 Unless otherwise noted, the methodology documentation, templates, diagrams, and research notes in this repository are licensed under **Creative Commons Attribution 4.0 International (CC BY 4.0)**. See [LICENSE](LICENSE).
 
@@ -143,11 +159,13 @@ Unless otherwise noted, the methodology documentation, templates, diagrams, and 
 - [SDO Core Model v0.1](docs/10-core-model.md)
 - [SDO Handoff Model v0.1](docs/11-handoff-model.md)
 - [SDO Adoption Model v0.1](docs/12-adoption-model.md)
+- [Generic End-to-End Example](examples/generic-end-to-end.md)
 - [Execution Specification v0.2](spec/execution-spec-v0.1.md)
 - [Execution Specification YAML Template](templates/execution-spec.yaml)
 - [Novelty Assessment](research/novelty-assessment-v0.1.md)
 - [Executor Independence Differentiation](research/executor-independence-differentiation-v0.1.md)
 - [Research Notes](research/README.md)
+- [Contributing](CONTRIBUTING.md)
 
 ## Research position
 
@@ -157,12 +175,14 @@ The current research hypothesis is narrower: SDO may be differentiated by synthe
 
 No claim of historical first invention is made at this stage.
 
-## Status
+## Public Draft status
 
-SDO is currently under conceptual development. Terminology, scope, principles, and formal mechanisms may change while the methodology is tested against different operational contexts.
+This repository is now published as a **Public Draft** of SDO.
 
-This repository is the source of truth for that development.
+It is not a finished standard. Terminology, scope, principles, and formal mechanisms may change in response to criticism, experimentation, real-world application, research, and community feedback.
+
+The repository remains the source of truth for methodology development.
 
 ## Version
 
-**Concept Draft v0.2 — September 2026**
+**Public Draft v0.3 — September 2026**
