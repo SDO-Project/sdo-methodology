@@ -8,15 +8,17 @@ Critical work should begin from an explicit specification of the conditions requ
 
 The purpose is not to document everything. The purpose is to make operationally important assumptions explicit before they become downstream defects.
 
-## 2. Actor-Neutral Specification
+## 2. Executor Independence
 
-Define the obligation before selecting the executor.
+Define the obligation independently from the executor.
 
-Where capability and authority permit, the same core Execution Specification should govern human, team, AI-agent, automated-system, external-party, or hybrid execution.
+SDO evaluates execution by whether the produced result conforms to the applicable specification, not by whether the work was performed by a particular type of actor.
 
-The specification should describe the intended outcome, constraints, evidence, acceptance criteria, and handoff conditions without unnecessarily coupling the work to the way it happens to be performed today.
+> **Execution is judged by conformance to the specification, not by the identity of the executor.**
 
-Actor neutrality does **not** imply unrestricted interchangeability. A specification may require specific capabilities, certifications, access rights, segregation of duties, independent verification, or mandatory human authority. These restrictions should be explicit parts of the execution contract.
+The executor may be a person, team, AI agent, software service, automation, robot, supplier, or another mechanism. The methodology does not change because the executor changes.
+
+Executor independence does not mean executor identity is never relevant. Capability, authority, certification, segregation of duties, approved technology, mandatory human control, or other restrictions may be explicitly required where justified by risk, policy, law, regulation, contract, or the nature of the obligation.
 
 The objective is to separate:
 
@@ -26,7 +28,9 @@ The objective is to separate:
 
 from:
 
-- **which eligible actor performs this execution**.
+- **who or what happens to perform a particular execution**.
+
+The executor belongs to the Execution Instance. The obligation belongs to the Execution Specification.
 
 ## 3. Contract-Based Handoffs
 
@@ -56,9 +60,9 @@ A status change alone is not always sufficient proof that the expected result wa
 
 ## 7. Immutable Traceability
 
-Relevant changes, approvals, exceptions, versions, evidence, executor identity, and decisions should preserve an auditable history.
+Relevant changes, approvals, exceptions, versions, evidence, execution identity, and decisions should preserve an auditable history.
 
-Traceability should support accountability, investigation, learning, and continuous improvement regardless of whether execution was human or machine-performed.
+Traceability should support accountability, investigation, learning, and continuous improvement regardless of the execution mechanism used.
 
 ## 8. Controlled Exceptions
 
