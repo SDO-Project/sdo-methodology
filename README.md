@@ -65,6 +65,18 @@ When a specification cannot be satisfied, execution may enter a **Controlled Exc
 
 > **SDO does not eliminate exceptions. It eliminates invisible exceptions.**
 
+## Handoff and responsibility transfer
+
+SDO distinguishes communication from transfer of responsibility.
+
+> **Notification is not handoff.**
+
+A valid handoff carries the verified Result, required Evidence, governing specification reference, applicable exceptions, Receiving Conditions, and Trace context to the next execution boundary.
+
+The receiving boundary defines the conditions under which it accepts responsibility. A message, email, status change, event, or task notification may announce that work is available, but responsibility transfers only when the receiving conditions are satisfied or a Controlled Exception explicitly authorizes conditional transfer.
+
+The canonical transfer structure is the **Handoff Record**, defined in the [SDO Handoff Model v0.1](docs/11-handoff-model.md).
+
 ## Foundational concepts
 
 - **Execution Specification** — the authoritative definition of the operational obligation, including conditions, constraints, expected result, acceptance criteria, evidence, exceptions, and handoff requirements.
@@ -75,10 +87,32 @@ When a specification cannot be satisfied, execution may enter a **Controlled Exc
 - **Validation Gate** — the mechanism that determines whether required conditions are satisfied before advancement.
 - **Evidence** — objective information used to support a conformance or verification decision.
 - **Controlled Exception** — a formally declared and authorized deviation from the normal specification.
+- **Handoff Record** — the canonical information set used to represent transfer of responsibility between execution boundaries.
+- **Receiving Conditions** — the explicit conditions that must be satisfied before the receiving boundary accepts responsibility.
 - **Handoff** — a validated transfer of a conformant result and required context to the next execution boundary.
 - **Trace** — the auditable history linking specification, execution, result, evidence, decisions, exceptions, and handoff.
 
 The formal relationships, invariants, and minimum conformance rules are defined in the [SDO Core Model v0.1](docs/10-core-model.md).
+
+## Adoption and implementation
+
+SDO is a methodology, not a mandatory software layer.
+
+Organizations should use existing systems whenever those systems can preserve the required semantics with acceptable reliability.
+
+> **Use the systems you already have before adding new ones.**
+
+The [SDO Adoption Model v0.1](docs/12-adoption-model.md) defines three reference adoption levels:
+
+```text
+LEVEL 1 — MANUAL
+LEVEL 2 — SYSTEM-ASSISTED
+LEVEL 3 — MACHINE-ENFORCED
+```
+
+These are implementation options, not mandatory maturity stages. A manual implementation that faithfully preserves SDO semantics may be more conformant than a sophisticated platform that does not.
+
+This adoption principle is called **Implementation Minimalism**.
 
 ## Open methodology
 
@@ -107,6 +141,8 @@ Unless otherwise noted, the methodology documentation, templates, diagrams, and 
 - [Minimum Viable Model](docs/08-minimum-viable-model.md)
 - [Open Methodology Philosophy](docs/09-open-methodology.md)
 - [SDO Core Model v0.1](docs/10-core-model.md)
+- [SDO Handoff Model v0.1](docs/11-handoff-model.md)
+- [SDO Adoption Model v0.1](docs/12-adoption-model.md)
 - [Execution Specification v0.2](spec/execution-spec-v0.1.md)
 - [Execution Specification YAML Template](templates/execution-spec.yaml)
 - [Novelty Assessment](research/novelty-assessment-v0.1.md)
