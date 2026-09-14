@@ -1,0 +1,107 @@
+spec_id: EXAMPLE-001
+name: Example Execution Unit
+version: 0.1
+status: draft
+owner: <spec_owner>
+effective_from: null
+
+intent:
+  purpose: <why_this_work_exists>
+  expected_outcome: <observable_business_outcome>
+  scope: <included_scope>
+  out_of_scope: []
+
+inputs:
+  required_inputs:
+    - id: input_1
+      description: <required_input>
+      source: <source_or_system>
+  optional_inputs: []
+  input_quality_rules: []
+
+preconditions:
+  - id: precondition_1
+    rule: <condition_that_must_be_true>
+
+constraints:
+  rules: []
+  prohibited_actions: []
+  time_constraints: []
+  resource_constraints: []
+
+executor:
+  eligible_executor_classes:
+    - human
+    - ai_agent
+    - software_system
+  required_capabilities: []
+  authority_requirements: []
+  segregation_rules: []
+
+outputs:
+  required_outputs:
+    - id: output_1
+      description: <required_output>
+  output_quality_rules: []
+
+acceptance:
+  acceptance_criteria:
+    - id: AC-001
+      criterion: <observable_success_condition>
+      required: true
+  verification_method: <automatic|human_review|independent_review|mixed>
+  verifier_requirements: []
+
+evidence:
+  required_evidence:
+    - id: EV-001
+      description: <evidence_required_for_verification>
+  evidence_retention: <policy_or_null>
+
+exceptions:
+  allowed: true
+  allowed_classes:
+    - waiver
+    - deviation
+    - temporary_exception
+    - emergency_override
+    - external_dependency
+    - spec_gap
+  exception_authorities: []
+  compensating_controls: []
+  expiration_rules: []
+
+handoff:
+  handoff_requirements:
+    - verified_output
+    - evidence_refs
+    - spec_version
+    - approved_exceptions
+    - trace_id
+  downstream_entry_conditions: []
+  completion_condition: <condition_for_completion>
+
+traceability:
+  trace_requirements:
+    - execution_id
+    - spec_id
+    - spec_version
+    - executor_identity
+    - executor_class
+    - validation_result
+    - authorization_result
+    - execution_start
+    - execution_end
+    - verification_result
+    - exception_records
+    - evidence_refs
+    - handoff_result
+  source_references: []
+
+execution_profiles:
+  human:
+    additional_requirements: []
+  ai_agent:
+    additional_requirements: []
+  software_system:
+    additional_requirements: []
